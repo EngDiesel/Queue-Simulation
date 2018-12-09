@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Queue System Simulation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='animate.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='select2.min.css')}}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="url_for('static', filename='perfect-scrollbar.css')">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/util.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
+    <!--===============================================================================================-->
+
+    <style>
+    </style>
+
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            Custmor No.
+                        </div>
+                        <div class="cell">
+                            Arrival
+                        </div>
+                        <div class="cell">
+                            Service Start
+                        </div>
+                        <div class="cell">
+                            Duration
+                        </div>
+                        <div class="cell">
+                            Service End
+                        </div>
+                        <div class="cell">System State</div>
+                        <div class="cell">Customer State</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="cell" data-title="Customer No.">
+                            1
+                        </div>
+                        <div class="cell" data-title="Arrival">
+                            0
+                        </div>
+                        <div class="cell" data-title="Service Start">
+                            3
+                        </div>
+                        <div class="cell" data-title="Duration">
+                            4
+                        </div>
+
+                        <div class="cell" data-title='Service End'>
+                            9
+                        </div>
+                        <div class="cell" data-title='System'>
+                            Busy
+                        </div>
+                        <div class="cell" data-title='Customer'>
+                            Idle
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="chartContainer"></div>
+
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="url_for('static', filename='js/popper.js')"></script>
+    <script src="url_for('static', filename='js/bootstrap.min.js')"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='js/select2.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='js/my-chart.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='js/jquery.canvasjs.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>
