@@ -1,5 +1,16 @@
 import random
 from model import Customer
+from flask import Flask
+
+from flask import Flask
+from flask import url_for
+from flask import render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def main():
+    return "Hello, World!"
 
 customers = []
 
@@ -28,3 +39,7 @@ for customer in customers:
      "\t| Service Begin => " + str(customer.serviceBegin) +\
      "\t| Service Duration => " + str(customer.serviceDuration) +\
      "\t| Service End => " + str(customer.serviceEnds)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
