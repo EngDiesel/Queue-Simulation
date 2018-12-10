@@ -8,17 +8,19 @@ from flask import render_template
 
 app = Flask(__name__)
 
+
+
 @app.route('/')
 def main():
     customers = []
     # Manually Generate The first 'Customer' with completely random values.
     customers.append(Customer())
     customers[0].interArrival = None
+    customers[0].state = "In Service"
 
-    # this loop generates 9 other 'Customers' and appends them to 'customers' list.
+    # this loop generates 4 other 'Customers' and appends them to 'customers' list.
     for i in range(1, 5):
         new = Customer()
-
         _arrivalTime = customers[i-1].arrivalTime + new.interArrival
         _serviceBegin = max(customers[i-1].serviceEnds, _arrivalTime)
         _serviceEnd = _serviceBegin + new.serviceDuration
@@ -27,6 +29,12 @@ def main():
         new.serviceBegin = _serviceBegin
         new.serviceEnds = _serviceEnd
         new.id = i + 1
+
+        # check for the customer state.
+        if new.arrivalTime < new.serviceBegin:
+            new.state = new.serviceBegin - new.arrivalTime
+        else:
+            new.state = 0
 
         customers.append(new)
 
@@ -39,20 +47,6 @@ def main():
          "\t| Service End => " + str(customer.serviceEnds)
 
     return render_template('index.html', customers=customers)
-
-    new.arrivalTime = _arrivalTime
-    new.serviceBegin = _serviceBegin
-    new.serviceEnds = _serviceEnd
-
-    customers.append(new)
-
-
-for customer in customers:
-    print "interArrival => " + str(customer.interArrival) + \
-     "\t| arrivalTime => " + str(customer.arrivalTime) +\
-     "\t| Service Begin => " + str(customer.serviceBegin) +\
-     "\t| Service Duration => " + str(customer.serviceDuration) +\
-     "\t| Service End => " + str(customer.serviceEnds)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
