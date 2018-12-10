@@ -26,7 +26,8 @@ window.onload = function () {
                 showInLegend: true,
                 color: "#FF4C4C",
                 name: "Client 1",
-                dataPoints: [{
+                dataPoints: [
+                  {
                         y: 1,
                         x: 1
                             },

@@ -10,11 +10,11 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='animate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/animate.css')}}">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/select2.min.css')}}">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="url_for('static', filename='perfect-scrollbar.css')">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/perfect-scrollbar.css')}}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
@@ -53,7 +53,6 @@
                           </div>
                         {% endfor %}
                     {% endif %}
-
                 </div>
             </div>
         </div>
@@ -61,6 +60,99 @@
 
 
     <div id="chartContainer"></div>
+
+    <script>
+      var color_iter = 0, customer_iter = 0;
+      function getRandomColor() {
+        var colors = [
+          "#AEEFBD",
+          "#B685F7",
+          "#F4777E",
+          "#EACBA6",
+          "#99E9F7",
+          "#DE89BE",
+          "#40434E",
+          "#ABC8C0"
+        ];
+        color_iter++;
+        return colors[color_iter-1];
+      }
+
+      function getCustomerName () {
+        customer_iter++;
+        return "Client " + customer_iter;
+      }
+
+
+      window.onload = function () {
+      "use strict";
+      var __data__ = [];
+      {% for item in customers %}
+        // get the points of each customer.
+        var __points__ = '{{ item.getPoints | safe }}';
+        __points__ = JSON.parse(__points__);
+
+        // build each customer's column.
+        var js_customer =  {
+                type: "stackedColumn",
+                showInLegend: true,
+                color: getRandomColor(),
+                name: getCustomerName(),
+                dataPoints: __points__
+            }
+
+          __data__.push(js_customer);
+
+      {% endfor %}
+
+
+      // ====================================================================
+      // ====================================================================
+      // ====================================================================
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          title: {
+              text: "Queueing System Simulation Graph",
+              fontFamily: "tahoma",
+              fontColor: "#3d3d3d"
+          },
+          axisX: {
+              interval: 1,
+              intervalType: "Tic",
+          },
+          axisY: {
+              valueFormatString: "#0 In The Queue",
+              gridColor: "#ccc",
+              tickColor: "#ccc"
+          },
+          toolTip: {
+              shared: false,
+              content: toolTipContent
+          },
+          data: __data__ // >>>>>>>>>>>>>>>>>>> Data <<<<<<<<<<<<<<<<<
+
+          });
+
+      chart.render();
+
+      function toolTipContent(e) {
+          var str = "";
+          var total = 0;
+          var str2, str3;
+          for (var i = 0; i < e.entries.length; i++) {
+              var str1 = "<span style= \"color:" + e.entries[i].dataSeries.color + "\"> " + e.entries[i].dataSeries.name + "</span>: $<strong>" + e.entries[i].dataPoint.y + "</strong>bn<br/>";
+              total = e.entries[i].dataPoint.y + total;
+              str = str.concat(str1);
+            }
+          str2 = "<span style = \"color:DodgerBlue;\"><strong>" + (e.entries[0].dataPoint.x).getFullYear() + "</strong></span><br/>";
+          total = Math.round(total * 100) / 100;
+          str3 = "<span style = \"color:Tomato\">Total:</span><strong> $" + total + "</strong>bn<br/>";
+          return (str2.concat(str)).concat(str3);
+        }
+      }
+
+    </script>
 
     <!--===============================================================================================-->
     <script src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
@@ -70,7 +162,7 @@
     <!--===============================================================================================-->
     <script src="{{url_for('static', filename='js/select2.min.js')}}"></script>
     <!--===============================================================================================-->
-    <script src="{{url_for('static', filename='js/my-chart.js')}}"></script>
+    <!-- <script src="{{url_for('static', filename='js/my-chart.js')}}"></script> -->
     <!--===============================================================================================-->
     <script src="{{url_for('static', filename='js/jquery.canvasjs.min.js')}}"></script>
     <!--===============================================================================================-->

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+  </head>
+  <body>
+
+    <div id="test"></div>
+
+    <script>
+      String.prototype.replaceAll = function(search, replacement) {
+          var target = this;
+          return target.replace(new RegExp(search, 'g'), replacement);
+      };
+
+      var elem = document.getElementById("test");
+      var d = JSON.parse('{{ customer.getPoints | safe}}');
+
+      elem.innerHTML = d[0].x + " - " + d[0].y;
+      console.log(d);
+    </script>
+  </body>
+</html>
