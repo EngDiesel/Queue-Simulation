@@ -20,12 +20,11 @@ def main():
     for i in range(1, 5):
         print i
         new = Customer()
-
         _arrivalTime = customers[i-1].arrivalTime + new.interArrival
         _serviceBegin = max(customers[i-1].serviceEnds, _arrivalTime)
         _serviceEnd = _serviceBegin + new.serviceDuration
 
-    customers = []
+        customers.append(new)
 
         # check for the customer state.
     if new.arrivalTime < new.serviceBegin:
@@ -50,6 +49,7 @@ def main():
         new.serviceBegin = _serviceBegin
         new.serviceEnds = _serviceEnd
 
+        # ??
         customers.append(new)
 
 
