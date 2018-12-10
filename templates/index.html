@@ -92,27 +92,49 @@
                 <div class="table">
 
                     <div class="row header">
-                        <div class="cell" style="width: 150px">Customer No.</div>
-                        <div class="cell">Inter Arrival</div>
-                        <div class="cell">Arrival</div>
-                        <div class="cell">Service Start</div>
-                        <div class="cell">Duration</div>
-                        <div class="cell">Service End</div>
+                        <div class="cell">
+                            Custmor No.
+                        </div>
+                        <div class="cell">
+                            Arrival
+                        </div>
+                        <div class="cell">
+                            Service Start
+                        </div>
+                        <div class="cell">
+                            Duration
+                        </div>
+                        <div class="cell">
+                            Service End
+                        </div>
+                        <div class="cell">System State</div>
+                        <div class="cell">Customer State</div>
                     </div>
 
-                    {% if customers %}
-                        {% for i in customers %}
-                          <div class="row">
-                            <div class="cell" data-title="Customer No.">{{i.id}}</div>
-                            <div class="cell" data-title="Inter Arrival">{{i.interArrival}}</div>
-                            <div class="cell" data-title="Arrival">{{i.arrivalTime}}</div>
-                            <div class="cell" data-title="Service Start">{{i.serviceBegin}}</div>
-                            <div class="cell" data-title="Duration">{{i.serviceDuration}}</div>
-                            <div class="cell" data-title="Service End">{{i.serviceEnds}}</div>
-                          </div>
-                        {% endfor %}
-                    {% endif %}
+                    <div class="row">
+                        <div class="cell" data-title="Customer No.">
+                            1
+                        </div>
+                        <div class="cell" data-title="Arrival">
+                            0
+                        </div>
+                        <div class="cell" data-title="Service Start">
+                            3
+                        </div>
+                        <div class="cell" data-title="Duration">
+                            4
+                        </div>
 
+                        <div class="cell" data-title='Service End'>
+                            9
+                        </div>
+                        <div class="cell" data-title='System'>
+                            Busy
+                        </div>
+                        <div class="cell" data-title='Customer'>
+                            Idle
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

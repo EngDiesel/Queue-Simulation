@@ -8,18 +8,38 @@ from flask import render_template
 
 app = Flask(__name__)
 
-
-
 @app.route('/')
 def main():
     customers = []
     # Manually Generate The first 'Customer' with completely random values.
     customers.append(Customer())
     customers[0].interArrival = None
-    customers[0].state = "In Service"
+    customers[0].state = 0
 
     # this loop generates 9 other 'Customers' and appends them to 'customers' list.
     for i in range(1, 5):
+        print i
+        new = Customer()
+
+        _arrivalTime = customers[i-1].arrivalTime + new.interArrival
+        _serviceBegin = max(customers[i-1].serviceEnds, _arrivalTime)
+        _serviceEnd = _serviceBegin + new.serviceDuration
+
+    customers = []
+
+        # check for the customer state.
+    if new.arrivalTime < new.serviceBegin:
+        new.state = new.serviceBegin - new.arrivalTime
+    else:
+        new.state = 0
+
+    for i in range(new.arrivalTime, new.serviceEnds):
+        new.points.append({'x': i, 'y': 1})
+
+    customers.append(new)
+
+    # this loop generates 9 other 'Customers' and appends them to 'customers' list.
+    for i in range(1, 10):
         new = Customer()
 
         _arrivalTime = customers[i-1].arrivalTime + new.interArrival
@@ -29,16 +49,6 @@ def main():
         new.arrivalTime = _arrivalTime
         new.serviceBegin = _serviceBegin
         new.serviceEnds = _serviceEnd
-        new.id = i + 1
-
-        # check for the customer state.
-        if new.arrivalTime < new.serviceBegin:
-            new.state = new.serviceBegin - new.arrivalTime
-        else:
-            new.state = 0
-
-        for i in range(new.arrivalTime, new.serviceEnds):
-            new.points.append({'x': i, 'y': 1})
 
         customers.append(new)
 
@@ -49,14 +59,6 @@ def main():
          "\t| Service Begin => " + str(customer.serviceBegin) +\
          "\t| Service Duration => " + str(customer.serviceDuration) +\
          "\t| Service End => " + str(customer.serviceEnds)
-
-
-
-
-    return render_template('index.html', customers=customers)
-
-
-
 
 
 
