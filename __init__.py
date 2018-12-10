@@ -16,6 +16,7 @@ def main():
     # Manually Generate The first 'Customer' with completely random values.
     customers.append(Customer())
     customers[0].interArrival = None
+    customers[0].state = "In Service"
 
     # this loop generates 9 other 'Customers' and appends them to 'customers' list.
     for i in range(1, 5):
@@ -30,6 +31,15 @@ def main():
         new.serviceEnds = _serviceEnd
         new.id = i + 1
 
+        # check for the customer state.
+        if new.arrivalTime < new.serviceBegin:
+            new.state = new.serviceBegin - new.arrivalTime
+        else:
+            new.state = 0
+
+        for i in range(new.arrivalTime, new.serviceEnds):
+            new.points.append({'x': i, 'y': 1})
+
         customers.append(new)
 
 
@@ -40,11 +50,16 @@ def main():
          "\t| Service Duration => " + str(customer.serviceDuration) +\
          "\t| Service End => " + str(customer.serviceEnds)
 
+
+
+
     return render_template('index.html', customers=customers)
 
 
 
 
 
+
 if __name__ == '__main__':
+    app.debug = True
     app.run(host='0.0.0.0', port=8000)
